@@ -3,7 +3,7 @@
   
 近年、EUを中心に起きている **「GDPR」** や **「ePrivacy規則」** などといったCookie取得の制限の強化から、ブラウザフィンガープリントは新しい個人の特定手法として注目をされている。  
 
-ここでは**[Fingerprintjs2](https://github.com/Valve/fingerprintjs2)** を元に実行速度の向上やより効果的なデータ取得方法などについて検証をしていく。
+ここでは　**[Fingerprintjs2](https://github.com/Valve/fingerprintjs2)**　を元に実行速度の向上やより効果的なデータ取得方法などについて検証をしていく。
   
 
 ## 取得できる情報
