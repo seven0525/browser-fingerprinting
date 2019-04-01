@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Browser Fingerprinting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <script src="fingerprint2.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <button type="button" id="btn">get fingerprint</button>
+    <p>Fingerprint: <strong id="fp"></strong></p>
+    <p>calculate time: <var id="time"></var>ms</p>
+    <p>component information:</p>
+    <pre id="details"></pre>
+
+    <script>
+        var fingerprintReport = function(){
+            // フィンガープリントで取得する項目を指定
+            var options = {excludes: {fonts: true, wedgl: true, audio: true, canvas: true}}
+            var now = new Date()
+
+            Fingerprint2.get(options, function(components) {
+                // フィンガープリントの取得
+                var murmur = Fingerprint2.x64hash128(
+                    components.map(function(pair) { return pair.value }).join(), 31)
+                
+                // 経過時間とともに表示
+                var time = (new Date()) - now
+                document.querySelector("#time").textContent = time
+                document.querySelector("#fp").textContent = murmur
+                var details = ""
+                
+                // 取得したコンポーネントの表示
+                for (var index in components){
+                    var obj = components[index]
+                    var line = index + ":" + obj.key + " = " + String(obj.value).substr(0, 100)
+                    details += line + "\n"
+                }
+                document.querySelector("#details").textContent = details
+            })
+        }
+
+        // 取得に時間がかかるためコールバックを非同期で実行（orタイムアウト）
+        var cancelId
+        var cancelFunction
+        if (window.requestIdleCallback){
+            cancelId = requestIdleCallback(fingerprintReport)
+            cancelFunction = cancelIdleCallback
+        } else {
+            cancelId = setTimeout(fingerprintReport, 500)
+            cancelFunction = clearTimeout
+        }
+
+        // ボタンがクリックされた時の処理
+        document.querySelector("#btn").addEventListener("click", function(){
+            if (cancelId){
+                cancelFunction(cancelId)
+                cancelId = undefined
+            }
+            fingerprintReport()
+        })
+    </script>
+</body>
+</html>
