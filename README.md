@@ -45,3 +45,6 @@
 **[Fingerprintjs2](https://github.com/Valve/fingerprintjs2)** を使用しています。  
 取得したくない項目はoptionsで[項目名：true]とすることで指定することができます。  
 ここでは取得コストの大きい、フォント、WebGL、Audio、Canvasを例として除外しています。　　
+
+## ページ画面
+![](images/result.png)
