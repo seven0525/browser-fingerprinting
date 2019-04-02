@@ -41,7 +41,9 @@
 （同一の情報が得られるような方法も出てきている:クロスブラウザフィンガープリンティング）
 
 ## 実行方法
-当リポジトリをクローンするなどし、fingerprint.htmlをローカル環境で実行してください。  
+[こちら](https://seven0525.github.io/browser-fingerprinting/)にデプロイ済み
+
+自分でアレンジをしていく場合は、当リポジトリをクローンするなどし、fingerprint.htmlをローカル環境で実行してください。  
 **[Fingerprintjs2](https://github.com/Valve/fingerprintjs2)** を使用しています。  
 取得したくない項目はoptionsで[項目名：true]とすることで指定することができます。  
 ここでは取得コストの大きい、フォント、WebGL、Audio、Canvasを例として除外しています。　　
